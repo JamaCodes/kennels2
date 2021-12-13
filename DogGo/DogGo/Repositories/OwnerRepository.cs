@@ -34,8 +34,7 @@ namespace DogGo.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, [Name], NeighborhoodId, Phone, Address
-                        FROM Owner
+                        Select n.Name as NeighborhoodName, O.Id as OwnerId, n.Id as NeighborhoodId, O.Name as OwnerName, Phone, Address From Owner O left join Neighborhood n ON O.Id = n.id
                     ";
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -45,11 +44,16 @@ namespace DogGo.Repositories
                         {
                             Owner owner = new Owner
                             {
-                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                Name = reader.GetString(reader.GetOrdinal("Name")),
-                                NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId")),
+                                Id = reader.GetInt32(reader.GetOrdinal("OwnerId")),
+                                Name = reader.GetString(reader.GetOrdinal("OwnerName")),
                                 Phone = reader.GetString(reader.GetOrdinal("Phone")),
-                                Address = reader.GetString(reader.GetOrdinal("Address"))
+                                Address = reader.GetString(reader.GetOrdinal("Address")),
+
+                                Neighborhood = new Neighborhood
+                                {
+                                   Name = reader.GetString(reader.GetOrdinal("NeighborhoodName")),
+
+                                }
                             };
 
                             owners.Add(owner);
@@ -60,7 +64,7 @@ namespace DogGo.Repositories
                 }
             }
         }
-
+      
         public Owner GetOwnerById(int id)
         {
             using (SqlConnection conn = Connection)
@@ -82,11 +86,16 @@ namespace DogGo.Repositories
                         {
                             Owner owner = new Owner
                             {
-                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                Name = reader.GetString(reader.GetOrdinal("Name")),              
-                                NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId")),
+                                Id = reader.GetInt32(reader.GetOrdinal("OwnerId")),
+                                Name = reader.GetString(reader.GetOrdinal("OwnerName")),
                                 Phone = reader.GetString(reader.GetOrdinal("Phone")),
-                                Address = reader.GetString(reader.GetOrdinal("Address"))
+                                Address = reader.GetString(reader.GetOrdinal("Address")),
+
+                                Neighborhood = new Neighborhood
+                                {
+                                    Name = reader.GetString(reader.GetOrdinal("NeighborhoodName")),
+
+                                }
                             };
 
                             return owner;
