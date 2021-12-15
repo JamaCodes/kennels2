@@ -410,3 +410,12 @@ C:\Users\jamam\workspace\csharp\DogGo\DogGo\DogGo\obj\Debug\net5.0\DogGo.genrunt
 C:\Users\jamam\workspace\csharp\DogGo\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Walkers\Index.cshtml.g.cs
 C:\Users\jamam\workspace\csharp\DogGo\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Walkers\Details.cshtml.g.cs
 C:\Users\jamam\workspace\csharp\DogGo\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Owner\Index.cshtml.g.cs
+C:\Users\jamam\workspace\csharp\DogGo\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Owner\Details.cshtml.g.cs
+C:\Users\jamam\workspace\csharp\DogGo\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Owner\Create.cshtml.g.cs
+C:\Users\jamam\workspace\csharp\DogGo\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Owner\Delete.cshtml.g.cs
+C:\Users\jamam\workspace\csharp\DogGo\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Owner\Edit.cshtml.g.cs
+C:\Users\jamam\workspace\csharp\DogGo\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Dogs\Index.cshtml.g.cs
+C:\Users\jamam\workspace\csharp\DogGo\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Dogs\Details.cshtml.g.cs
+C:\Users\jamam\workspace\csharp\DogGo\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Dogs\Create.cshtml.g.cs
+C:\Users\jamam\workspace\csharp\DogGo\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Dogs\Edit.cshtml.g.cs
+C:\Users\jamam\workspace\csharp\DogGo\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Dogs\Delete.cshtml.g.cs
