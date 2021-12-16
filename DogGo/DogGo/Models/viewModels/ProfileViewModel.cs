@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 
 
-namespace DogGo.Models.ViewModels
+namespace DogGo.Models.viewModels
 {
     public class ProfileViewModel
     {
