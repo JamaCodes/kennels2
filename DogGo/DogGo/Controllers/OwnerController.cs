@@ -8,6 +8,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using DogGo.Models.viewModels;
 using DogGo.Models.ViewModels;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DogGo.Controllers
 {
@@ -38,6 +42,43 @@ namespace DogGo.Controllers
         // GET: OwnerController
         // GET: Owner
         // GET: Owner
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Login(LoginViewModel viewModel)
+        {
+            Owner owner = _ownerRepo.GetOwnerByEmail(viewModel.Email);
+
+            if (owner == null)
+            {
+                return Unauthorized();
+            }
+
+            List<Claim> claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.NameIdentifier, owner.Id.ToString()),
+        new Claim(ClaimTypes.Email, owner.Email),
+        new Claim(ClaimTypes.Role, "DogOwner"),
+    };
+
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(
+                claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity));
+
+            return RedirectToAction("Index", "Dogs");
+        }
+
+        public async Task<ActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
         public ActionResult Index()
         {
             List<Owner> owners = _ownerRepo.GetAllOwners();
@@ -66,6 +107,7 @@ namespace DogGo.Controllers
 
         // GET: OwnerController/Create
         // GET: Owners/Create
+        
         public ActionResult Create()
         {
             List<Neighborhood> neighborhoods = _neighborhoodRepo.GetAll();
