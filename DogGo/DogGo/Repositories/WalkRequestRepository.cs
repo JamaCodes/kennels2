@@ -80,7 +80,7 @@ namespace DogGo.Repositories
                                 Message = reader.GetString(reader.GetOrdinal("Message")),
                                 OwnerId = reader.GetInt32(reader.GetOrdinal("OwnerId")),
                                 DogId = reader.GetInt32(reader.GetOrdinal("DogId")),
-                                RequestDateTime = reader.GetDateTimeOffset(reader.GetOrdinal("RequestDateTime")),
+                                RequestDateTime = reader.GetDateTime(reader.GetOrdinal("RequestDateTime")),
                                 Created = reader.GetDateTimeOffset(reader.GetOrdinal("Created")),
 
                             };

@@ -19,7 +19,7 @@ namespace DogGo.Models
 
         public bool Request { get; set; }
 
-        public DateTimeOffset RequestDateTime { get; set; }
+        public DateTime RequestDateTime { get; set; }
 
         public DateTimeOffset Created { get; set; }
 
