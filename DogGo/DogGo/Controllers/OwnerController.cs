@@ -25,18 +25,22 @@ namespace DogGo.Controllers
         private readonly INeighborhoodRepository _neighborhoodRepo; 
         private readonly IDogRepository _dogRepo;
         private readonly IWalkerRepository _walkerRepo;
+        private readonly IWalkRequestRepository _walkRequestRepo;
 
 
         public OwnerController(
             IOwnerRepository ownerRepository,
             IDogRepository dogRepository,
             IWalkerRepository walkerRepository,
-            INeighborhoodRepository neighborhoodRepository)
+            INeighborhoodRepository neighborhoodRepository,
+            IWalkRequestRepository walkRequestRepository
+            )
         {
             _ownerRepo = ownerRepository;
             _dogRepo = dogRepository;
             _walkerRepo = walkerRepository;
             _neighborhoodRepo = neighborhoodRepository;
+            _walkRequestRepo = walkRequestRepository;
         }
 
         // GET: OwnerController
@@ -99,7 +103,8 @@ namespace DogGo.Controllers
             {
                 Owner = owner,
                 Dogs = dogs,
-                Walkers = walkers
+                Walkers = walkers,
+                WalkRequest = new WalkRequest (),
             };
 
             return View(vm);

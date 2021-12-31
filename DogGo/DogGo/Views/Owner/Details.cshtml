@@ -1,7 +1,7 @@
 ﻿@model DogGo.Models.viewModels.ProfileViewModel
 
 @{ ViewData["Title"] = "Profile"; }
-<div>
+<>
     <h1 class="mb-4">@Model.Owner.Name</h1>
 
     <section class="container">
@@ -68,11 +68,56 @@
                 @foreach (Walker walker in Model.Walkers)
                 {
                     <li class="list-group-item disabled" aria-disabled="true">
+
                         <img src="@walker.ImageUrl" style="width:50px" />
-                        <span class="font-weight-bold ml-4">@walker.Name</span>
+                        <a class="font-weight-bold ml-4" asp-area="" asp-controller="Walkers" asp-action="Index">
+                            @walker.Name
+                        </a>
                     </li>
                 }
             </ul>
         </section>
-    </div>
-</div>
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="WalkRequest.Message" class="control-label"></label>
+                        <input asp-for="WalkRequest.Message" class="form-control" />
+                        <span asp-validation-for="WalkRequest.Message" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="WalkRequest.RequestDateTime" class="control-label"></label>
+                        <input asp-for="WalkRequest.RequestDateTime" class="form-control" />
+                        <span asp-validation-for="WalkRequest.RequestDateTime" class="text-danger"></span>
+                    </div>
+                    
+                        <label asp-for="WalkRequest.WalkerId" class="control-label"></label>
+                        <select asp-for="WalkRequest.WalkerId" class="form-control">
+                            <option value="">Select Walker</option>
+                            @foreach (Walker walker in Model.Walkers)
+                            {
+                                <option value="@walker.Id">@walker.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="WalkRequest.Walker" class="text-danger"></span>
+                    </form>
+                    </div>
+                   
+               <form>
+                    <div class="form-group">
+                        <label asp-for="WalkRequest.DogId" class="control-label"></label>
+                        <select asp-for="WalkRequest.DogIdS" class="form-control">
+                            <option value="">Select Dog</option>
+                            @foreach (Dog Dogs in Model.Dogs)
+                            {
+                                <option value="@Dogs.Id">@Dogs.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="WalkRequest.DogId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+
+                    </div>
+                    </form>
+            </div>

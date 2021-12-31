@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DogGo.Repositories
 {
-    public class WalkRequestRepository
+    public class WalkRequestRepository : IWalkRequestRepository
     {
         private readonly IConfiguration _config;
 
@@ -47,6 +47,48 @@ namespace DogGo.Repositories
                     int id = (int)cmd.ExecuteScalar();
 
                     walkRequest.Id = id;
+                }
+            }
+
+        }
+        public List<WalkRequest> GetRequests()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                    SELECT * FROM WalkRequest r
+                                    LEFT JOIN Walker w on w.Id = r.WalkerId
+                                    WHERE r.walkerId = @
+
+
+
+                                        ";
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+
+                        List<WalkRequest> walkRequests = new List<WalkRequest>();
+
+                        while (reader.Read())
+                        {
+                            WalkRequest walkRequest = new WalkRequest()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Message = reader.GetString(reader.GetOrdinal("Message")),
+                                OwnerId = reader.GetInt32(reader.GetOrdinal("OwnerId")),
+                                DogId = reader.GetInt32(reader.GetOrdinal("DogId")),
+                                RequestDateTime = reader.GetDateTimeOffset(reader.GetOrdinal("RequestDateTime")),
+                                Created = reader.GetDateTimeOffset(reader.GetOrdinal("Created")),
+
+                            };
+                            walkRequests.Add(walkRequest);
+                        }
+
+                        return walkRequests;
+                    }
                 }
             }
         }
